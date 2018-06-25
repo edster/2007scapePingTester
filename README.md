@@ -1,9 +1,16 @@
-# 2007scapePingTester
-Test server pings for oldschool runescape
+# Test server pings for oldschool runescape
+Please create a pull request for changes or fixes.
+
+
+
+
 Options:
-  Threashold [int]:     Acceptable ping, anything above this will be red.
-  Free Worlds [y/n]:    Do you want to see free worlds?
-  Member Worlds ['y/n]: Do you want to see member worlds?
+
+	Threashold [int]:     Acceptable ping, anything above this will be red.
+  	Free Worlds [y/n]:    Do you want to see free worlds?
+  	Member Worlds ['y/n]: Do you want to see member worlds?
+
+
 
 This tester is created in PowerShell. You will need to be able to execute PowerShell scripts to use it.
 
