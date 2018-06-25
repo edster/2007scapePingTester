@@ -102,39 +102,64 @@ $worlds = @(
     @{"world"="94";"type"="Free";"condition" = "-"}
     @{"world"="100";"type"="Members";"condition" = "Deadman Invitational"}
     @{"world"="117";"type"="Free";"condition" = "-"}
-
 )
 #var: Ping object
-$ping = new-object System.Net.NetworkInformation.Ping
+$ping = new-object System.Net.NetworkInformation.Ping -ErrorAction Stop
 
 #Function to ping worlds and export results
-function pingWorlds($worldsToTest){
+function testWorlds($worldsToTest){
 
-    foreach ($world in $worldsToTest) {
-        if(($world['type'] -eq 'Free' -and $testFree) -or ($world['type'] -eq "Members" -and $testMembers)){
+    For ($i=0; $i -le $worldsToTest.Count; $i++) {
+        if(($worldsToTest[$i]['type'] -eq 'Free' -and $testFree) -or ($worldsToTest[$i]['type'] -eq "Members" -and $testMembers)){
 	        #response from ping
-            $reply = $ping.send('oldschool' + $world['world'] +'.runescape.com')
+            Try {
+                $reply = $ping.send('oldschool' + $worldsToTest[$i]['world'] +'.runescape.com')
+            }
+            Catch {
+                $worldsToTest[$i].Add("ping", "99999999")
+                $worldsToTest[$i].Add("message", "$_.Exception.Message")
+                $reply = "fail"
+            }
+            
+            if ($reply -eq "fail"){
+                
+            } 
+            
+            elseif ($reply.status -eq "success"){
+                $worldsToTest[$i].Add("ping", $reply.RoundtripTime)
+            
+                #make the ping response readable
+                $type = $worldsToTest[$i]['type']
+                $condition = $worldsToTest[$i]['condition']
 
-	        if ($reply.status -eq "success"){
-            #make the ping response readable
-            $type = $world['type']
-            $condition = $world['condition']
-            $string = [string]::Format("$type World {0}: Roundtrip: {1}ms - Address: {2} -- Type: $condition",$world['world'], $reply.RoundtripTime, $reply.Address.ToString())	
-                if($reply.RoundtripTime -le $upperBounds){
-			        write-host -fore Green $string
-                } 
-                else{
-			        write-host -fore Red $string
-		        }
+                $string = [string]::Format("$type World {0}: Roundtrip: {1}ms - Address: {2} -- Type: $condition",$worldsToTest[$i]['world'], $reply.RoundtripTime, $reply.Address.ToString())	
+                               
+                $worldsToTest[$i].Add("message", $string)
             }
 
 	        else {
-		        $z = [system.net.dns]::gethostaddresses($hostname)[0].ipaddresstostring
+                $worldsToTest[$i].Add("ping", "99999999")
+                $z = [system.net.dns]::gethostaddresses($hostname)[0].ipaddresstostring
 		
-		        [string]::Format("FAIL,{0},{1}",$z,"***")
+		        $worldsToTest[$i].Add("message", [string]::Format("FAIL,{0},{1}",$z,"***"))
 	        }
         }
+
+        $i++
     }
+
+    $worldsToTest.GetEnumerator() | Sort-Object { $_.ping } | 
+        ForEach-Object{
+            if(!$_.message -eq ''){
+                if($_.ping -le $upperBounds){
+			        write-host -fore Green $_.message
+                } 
+                else{
+			        write-host -fore Red $_.message
+		        }
+            }
+            
+        }
 }
 
 #Prompt user for data, or use the default
@@ -155,9 +180,10 @@ Function Read-Bool($text){
     }
 }
 
+
 #Check if they want to change the defaults
 $upperBounds = Read-Default 'What threshold is prefered?' $thresholdDefault
 [bool]$testFree = Read-Bool 'Do you want to test f2p servers?'
 [bool]$testMembers = Read-Bool 'Do you want to test p2p servers?'
 
-pingWorlds $worlds
+testWorlds $worlds

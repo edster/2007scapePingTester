@@ -1,7 +1,7 @@
 # Test server pings for oldschool runescape
 Please create a pull request for changes or fixes.
 
-
+USE TAGS FOR STABILITY
 
 
 Options:
