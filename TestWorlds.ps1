@@ -148,18 +148,8 @@ function testWorlds($worldsToTest){
         $i++
     }
 
-    $worldsToTest.GetEnumerator() | Sort-Object { $_.ping } | 
-        ForEach-Object{
-            if(!$_.message -eq ''){
-                if($_.ping -le $upperBounds){
-			        write-host -fore Green $_.message
-                } 
-                else{
-			        write-host -fore Red $_.message
-		        }
-            }
-            
-        }
+    
+    return SortWorlds $worldsToTest
 }
 
 #Prompt user for data, or use the default
@@ -180,10 +170,42 @@ Function Read-Bool($text){
     }
 }
 
+Function SortWorlds($worldsToSort){
+    if($sortByPing -and $sortByType){
+        $worldsToSort.GetEnumerator() | Sort-Object { $_.type, $_.ping } 
+    } 
+    elseif($sortByType){
+        $worldsToSort.GetEnumerator() | Sort-Object { $_.type, $_.world}
+    }
+    elseif($sorByPing){
+        $worldsToSort.GetEnumerator() | Sort-Object { $_.ping }
+    }
+
+    return $worldsToSort
+}
+
 
 #Check if they want to change the defaults
 $upperBounds = Read-Default 'What threshold is prefered?' $thresholdDefault
 [bool]$testFree = Read-Bool 'Do you want to test f2p servers?'
 [bool]$testMembers = Read-Bool 'Do you want to test p2p servers?'
+[bool]$sortByPing = Read-Bool 'Do you want to sort worlds by ping?'
+[bool]$sortByType = Read-Bool 'Do you want to sort worlds by membership type?'
 
-testWorlds $worlds
+$worlds = testWorlds $worlds
+
+$worlds = SortWorlds $worlds
+
+
+ForEach ($world in $worlds){
+    if(!$world.message -eq ''){
+        if($world.ping -le $upperBounds){
+			write-host -fore Green $world.message
+        } 
+        else{
+			write-host -fore Red $world.message
+		}
+    }
+           
+}
+
