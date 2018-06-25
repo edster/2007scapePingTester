@@ -1,3 +1,11 @@
+###########################################################
+# AUTHOR  	: Edi Mange
+# GH		: edster (https://github.com/edster)
+# Website	: https://edi.mange.biz
+# UPDATED 	: 6/25/2018
+###########################################################
+
+
 #vars: acceptable threshold
 $thresholdDefault = 80
 $upperBounds
