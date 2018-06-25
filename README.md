@@ -7,4 +7,4 @@ You can open the script in PowerShell ISE and just execute.
 
 If you open powershell and execute the script and run into execution denied errors run `set-executionpolicy Unrestricted` in your console before running the script.
 
-![Alt Text](https://edi.mange.biz/2007scapeTester.gif)
+![In Action Gif](https://edi.mange.biz/2007scapeTester.gif)
