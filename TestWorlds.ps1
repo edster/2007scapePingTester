@@ -116,8 +116,8 @@ function testWorlds($worldsToTest){
                 $reply = $ping.send('oldschool' + $worldsToTest[$i]['world'] +'.runescape.com')
             }
             Catch {
-                $worldsToTest[$i].Add("ping", "99999999")
-                $worldsToTest[$i].Add("message", "$_.Exception.Message")
+                $worldsToTest[$i]['ping'] = 99999999
+                $worldsToTest[$i]['message'] = $_.Exception.Message
                 $reply = "fail"
             }
             
@@ -126,7 +126,7 @@ function testWorlds($worldsToTest){
             } 
             
             elseif ($reply.status -eq "success"){
-                $worldsToTest[$i].Add("ping", $reply.RoundtripTime)
+                $worldsToTest[$i]['ping'] = $reply.RoundtripTime
             
                 #make the ping response readable
                 $type = $worldsToTest[$i]['type']
@@ -134,22 +134,26 @@ function testWorlds($worldsToTest){
 
                 $string = [string]::Format("$type World {0}: Roundtrip: {1}ms - Address: {2} -- Type: $condition",$worldsToTest[$i]['world'], $reply.RoundtripTime, $reply.Address.ToString())	
                                
-                $worldsToTest[$i].Add("message", $string)
+                $worldsToTest[$i]['message'] = $string
             }
 
 	        else {
-                $worldsToTest[$i].Add("ping", "99999999")
+                $worldsToTest[$i]['ping'] = 99999999
                 $z = [system.net.dns]::gethostaddresses($hostname)[0].ipaddresstostring
 		
-		        $worldsToTest[$i].Add("message", [string]::Format("FAIL,{0},{1}",$z,"***"))
+		        $worldsToTest[$i]['message'] = [string]::Format("World {0} Failed,{1},{2}",$world[$i]['world'],$z,"***")
 	        }
         }
 
         $i++
     }
 
-    
-    return SortWorlds $worldsToTest
+    if($sortByPing){
+        return $worldsToTest.GetEnumerator() | sort{ $_.ping } 
+    } 
+
+    return $worldsToTest
+
 }
 
 #Prompt user for data, or use the default
@@ -170,31 +174,13 @@ Function Read-Bool($text){
     }
 }
 
-Function SortWorlds($worldsToSort){
-    if($sortByPing -and $sortByType){
-        $worldsToSort.GetEnumerator() | Sort-Object { $_.type, $_.ping } 
-    } 
-    elseif($sortByType){
-        $worldsToSort.GetEnumerator() | Sort-Object { $_.type, $_.world}
-    }
-    elseif($sorByPing){
-        $worldsToSort.GetEnumerator() | Sort-Object { $_.ping }
-    }
-
-    return $worldsToSort
-}
-
-
 #Check if they want to change the defaults
 $upperBounds = Read-Default 'What threshold is prefered?' $thresholdDefault
 [bool]$testFree = Read-Bool 'Do you want to test f2p servers?'
 [bool]$testMembers = Read-Bool 'Do you want to test p2p servers?'
 [bool]$sortByPing = Read-Bool 'Do you want to sort worlds by ping?'
-[bool]$sortByType = Read-Bool 'Do you want to sort worlds by membership type?'
 
 $worlds = testWorlds $worlds
-
-$worlds = SortWorlds $worlds
 
 
 ForEach ($world in $worlds){
@@ -208,4 +194,3 @@ ForEach ($world in $worlds){
     }
            
 }
-

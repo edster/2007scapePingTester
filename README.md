@@ -9,6 +9,7 @@ Options:
 	Threashold [int]:     Acceptable ping, anything above this will be red.
   	Free Worlds [y/n]:    Do you want to see free worlds?
   	Member Worlds ['y/n]: Do you want to see member worlds?
+  	Sort by Ping ['y/n]:  Do you want to sort by ping?
 
 
 
