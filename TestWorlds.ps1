@@ -5,103 +5,102 @@
 # UPDATED 	: 6/25/2018
 ###########################################################
 
-
 #vars: acceptable threshold
 $thresholdDefault = 80
 $upperBounds
 #var: array of worlds
 $worlds = @(
-    @{"world"="1";"type"="Free";"condition" = "Trade - Free"}
-    @{"world"="2";"type"="Members";"condition" = "Trade - Members"}
-    @{"world"="3";"type"="Members";"condition" = "-"}
-    @{"world"="4";"type"="Members";"condition" = "Trouble Brewing"}
-    @{"world"="5";"type"="Members";"condition" = "Falador Party Room"}
-    @{"world"="6";"type"="Members";"condition" = "Barbarian Assault"}
-    @{"world"="7";"type"="Members";"condition" = "-"}
-    @{"world"="8";"type"="Free";"condition" = "Wilderness PK - Free"}
-    @{"world"="9";"type"="Members";"condition" = "Wintertodt"}
-    @{"world"="10";"type"="Members";"condition" = "Kourend Group Activity"}
-    @{"world"="11";"type"="Members";"condition" = "Chambers of Xeric"}
-    @{"world"="12";"type"="Members";"condition" = "Treasure Trails"}
-    @{"world"="13";"type"="Members";"condition" = "-"}
-    @{"world"="14";"type"="Members";"condition" = "Dorgesh-Kaan Agility"}
-    @{"world"="15";"type"="Members";"condition" = "-"}
-    @{"world"="16";"type"="Free";"condition" = "Wilderness PK - Free"}
-    @{"world"="17";"type"="Members";"condition" = "LMS Competitive"}
-    @{"world"="18";"type"="Members";"condition" = "-"}
-    @{"world"="19";"type"="Members";"condition" = "Bounty World"}
-    @{"world"="20";"type"="Members";"condition" = "-"}
-    @{"world"="21";"type"="Members";"condition" = "-"}
-    @{"world"="22";"type"="Members";"condition" = "Duel Arena"}
-    @{"world"="23";"type"="Members";"condition" = "Volcanic Mine"}
-    @{"world"="24";"type"="Members";"condition" = "-"}
-    @{"world"="25";"type"="Members";"condition" = "PvP World"}
-    @{"world"="26";"type"="Free";"condition" = "LMS Casual"}
-    @{"world"="27";"type"="Members";"condition" = "Ourania Altar"}
-    @{"world"="28";"type"="Members";"condition" = "-"}
-    @{"world"="29";"type"="Members";"condition" = "Clan Wars - Members"}
-    @{"world"="30";"type"="Members";"condition" = "House Party, Gilded Altar"}
-    @{"world"="31";"type"="Members";"condition" = "-"}
-    @{"world"="32";"type"="Members";"condition" = "-"}
-    @{"world"="33";"type"="Members";"condition" = "Games Room, Rogues' Den"}
-    @{"world"="34";"type"="Members";"condition" = "Castle Wars 1"}
-    @{"world"="35";"type"="Free";"condition" = "-"}
-    @{"world"="36";"type"="Members";"condition" = "Running - nature rune"}
-    @{"world"="37";"type"="Members";"condition" = "PvP World - High Risk"}
-    @{"world"="38";"type"="Members";"condition" = "Chambers of Xeric"}
-    @{"world"="39";"type"="Members";"condition" = "-"}
-    @{"world"="40";"type"="Members";"condition" = "-"}
-    @{"world"="41";"type"="Members";"condition" = "Running - law rune"}
-    @{"world"="42";"type"="Members";"condition" = "Role-playing"}
-    @{"world"="43";"type"="Members";"condition" = "-"}
-    @{"world"="44";"type"="Members";"condition" = "Pest Control"}
-    @{"world"="45";"type"="Members";"condition" = "Deadman"}
-    @{"world"="46";"type"="Members";"condition" = "Agility training"}
-    @{"world"="47";"type"="Members";"condition" = "-"}
-    @{"world"="48";"type"="Members";"condition" = "-"}
-    @{"world"="49";"type"="Members";"condition" = "2000 skill total"}
-    @{"world"="50";"type"="Members";"condition" = "TzHaar Fight Pit"}
-    @{"world"="51";"type"="Members";"condition" = "-"}
-    @{"world"="52";"type"="Members";"condition" = "Blast Furnace"}
-    @{"world"="53";"type"="Members";"condition" = "1250 skill total"}
-    @{"world"="54";"type"="Members";"condition" = "Castle Wars 2"}
-    @{"world"="55";"type"="Members";"condition" = "-"}
-    @{"world"="56";"type"="Members";"condition" = "-"}
-    @{"world"="57";"type"="Members";"condition" = "-"}
-    @{"world"="58";"type"="Members";"condition" = "Blast Furnace"}
-    @{"world"="59";"type"="Members";"condition" = "-"}
-    @{"world"="60";"type"="Members";"condition" = "-"}
-    @{"world"="61";"type"="Members";"condition" = "1000 skill total"}
-    @{"world"="62";"type"="Members";"condition" = "Pyramid Plunder"}
-    @{"world"="65";"type"="Members";"condition" = "High Risk World"}
-    @{"world"="66";"type"="Members";"condition" = "1500 skill total"}
-    @{"world"="67";"type"="Members";"condition" = "Group Questing"}
-    @{"world"="68";"type"="Members";"condition" = "-"}
-    @{"world"="69";"type"="Members";"condition" = "Wilderness PK - Members"}
-    @{"world"="70";"type"="Members";"condition" = "Fishing Trawler"}
-    @{"world"="71";"type"="Free";"condition" = "PvP World - Free"}
-    @{"world"="73";"type"="Members";"condition" = "1750 skill total"}
-    @{"world"="74";"type"="Members";"condition" = "Theatre of Blood"}
-    @{"world"="75";"type"="Members";"condition" = "Barbarian Fishing"}
-    @{"world"="76";"type"="Members";"condition" = "Theatre of Blood"}
-    @{"world"="77";"type"="Members";"condition" = "Mort'ton temple, Rat Pits"}
-    @{"world"="78";"type"="Members";"condition" = "-"}
-    @{"world"="81";"type"="Free";"condition" = "500 skill total"}
-    @{"world"="82";"type"="Free";"condition" = "-"}
-    @{"world"="83";"type"="Free";"condition" = "Castle Wars - Free"}
-    @{"world"="84";"type"="Free";"condition" = "Caste Wars"}
-    @{"world"="85";"type"="Free";"condition" = "750 skill total"}
-    @{"world"="86";"type"="Members";"condition" = "Blast Furnace"}
-    @{"world"="87";"type"="Members";"condition" = "Blast Furnace"}
-    @{"world"="88";"type"="Members";"condition" = "-"}
-    @{"world"="89";"type"="Members";"condition" = "-"}
-    @{"world"="90";"type"="Members";"condition" = "-"}
-    @{"world"="91";"type"="Members";"condition" = "1750 skill total"}
-    @{"world"="92";"type"="Members";"condition" = "PvP World"}
-    @{"world"="93";"type"="Free";"condition" = "Clan Wars - Free"}
-    @{"world"="94";"type"="Free";"condition" = "-"}
-    @{"world"="100";"type"="Members";"condition" = "Deadman Invitational"}
-    @{"world"="117";"type"="Free";"condition" = "-"}
+    @{"id"="1";"world"="301";"type"="Free";"condition" = "Trade - Free"}
+    @{"id"="2";"world"="302";"type"="Members";"condition" = "Trade - Members"}
+    @{"id"="3";"world"="303";"type"="Members";"condition" = "-"}
+    @{"id"="4";"world"="304";"type"="Members";"condition" = "Trouble Brewing"}
+    @{"id"="5";"world"="305";"type"="Members";"condition" = "Falador Party Room"}
+    @{"id"="6";"world"="306";"type"="Members";"condition" = "Barbarian Assault"}
+    @{"id"="7";"world"="307";"type"="Members";"condition" = "-"}
+    @{"id"="8";"world"="308";"type"="Free";"condition" = "Wilderness PK - Free"}
+    @{"id"="9";"world"="309";"type"="Members";"condition" = "Wintertodt"}
+    @{"id"="10";"world"="310";"type"="Members";"condition" = "Kourend Group Activity"}
+    @{"id"="11";"world"="311";"type"="Members";"condition" = "Chambers of Xeric"}
+    @{"id"="12";"world"="312";"type"="Members";"condition" = "Treasure Trails"}
+    @{"id"="13";"world"="313";"type"="Members";"condition" = "-"}
+    @{"id"="14";"world"="314";"type"="Members";"condition" = "Dorgesh-Kaan Agility"}
+    @{"id"="15";"world"="315";"type"="Members";"condition" = "-"}
+    @{"id"="16";"world"="316";"type"="Free";"condition" = "Wilderness PK - Free"}
+    @{"id"="17";"world"="317";"type"="Members";"condition" = "LMS Competitive"}
+    @{"id"="18";"world"="318";"type"="Members";"condition" = "-"}
+    @{"id"="19";"world"="319";"type"="Members";"condition" = "Bounty World"}
+    @{"id"="20";"world"="320";"type"="Members";"condition" = "-"}
+    @{"id"="21";"world"="321";"type"="Members";"condition" = "-"}
+    @{"id"="22";"world"="322";"type"="Members";"condition" = "Duel Arena"}
+    @{"id"="23";"world"="323";"type"="Members";"condition" = "Volcanic Mine"}
+    @{"id"="24";"world"="324";"type"="Members";"condition" = "-"}
+    @{"id"="25";"world"="325";"type"="Members";"condition" = "PvP World"}
+    @{"id"="26";"world"="326";"type"="Free";"condition" = "LMS Casual"}
+    @{"id"="27";"world"="327";"type"="Members";"condition" = "Ourania Altar"}
+    @{"id"="28";"world"="328";"type"="Members";"condition" = "-"}
+    @{"id"="29";"world"="329";"type"="Members";"condition" = "Clan Wars - Members"}
+    @{"id"="30";"world"="330";"type"="Members";"condition" = "House Party, Gilded Altar"}
+    @{"id"="31";"world"="331";"type"="Members";"condition" = "-"}
+    @{"id"="32";"world"="332";"type"="Members";"condition" = "-"}
+    @{"id"="33";"world"="333";"type"="Members";"condition" = "Games Room, Rogues' Den"}
+    @{"id"="34";"world"="334";"type"="Members";"condition" = "Castle Wars 1"}
+    @{"id"="35";"world"="335";"type"="Free";"condition" = "-"}
+    @{"id"="36";"world"="336";"type"="Members";"condition" = "Running - nature rune"}
+    @{"id"="37";"world"="337";"type"="Members";"condition" = "PvP World - High Risk"}
+    @{"id"="38";"world"="338";"type"="Members";"condition" = "Chambers of Xeric"}
+    @{"id"="39";"world"="339";"type"="Members";"condition" = "-"}
+    @{"id"="40";"world"="340";"type"="Members";"condition" = "-"}
+    @{"id"="41";"world"="341";"type"="Members";"condition" = "Running - law rune"}
+    @{"id"="42";"world"="342";"type"="Members";"condition" = "Role-playing"}
+    @{"id"="43";"world"="343";"type"="Members";"condition" = "-"}
+    @{"id"="44";"world"="344";"type"="Members";"condition" = "Pest Control"}
+    @{"id"="45";"world"="345";"type"="Members";"condition" = "Deadman"}
+    @{"id"="46";"world"="346";"type"="Members";"condition" = "Agility training"}
+    @{"id"="47";"world"="347";"type"="Members";"condition" = "-"}
+    @{"id"="48";"world"="348";"type"="Members";"condition" = "-"}
+    @{"id"="49";"world"="349";"type"="Members";"condition" = "2000 skill total"}
+    @{"id"="50";"world"="350";"type"="Members";"condition" = "TzHaar Fight Pit"}
+    @{"id"="51";"world"="351";"type"="Members";"condition" = "-"}
+    @{"id"="52";"world"="352";"type"="Members";"condition" = "Blast Furnace"}
+    @{"id"="53";"world"="353";"type"="Members";"condition" = "1250 skill total"}
+    @{"id"="54";"world"="354";"type"="Members";"condition" = "Castle Wars 2"}
+    @{"id"="55";"world"="355";"type"="Members";"condition" = "-"}
+    @{"id"="56";"world"="356";"type"="Members";"condition" = "-"}
+    @{"id"="57";"world"="357";"type"="Members";"condition" = "-"}
+    @{"id"="58";"world"="358";"type"="Members";"condition" = "Blast Furnace"}
+    @{"id"="59";"world"="359";"type"="Members";"condition" = "-"}
+    @{"id"="60";"world"="360";"type"="Members";"condition" = "-"}
+    @{"id"="61";"world"="361";"type"="Members";"condition" = "1000 skill total"}
+    @{"id"="62";"world"="362";"type"="Members";"condition" = "Pyramid Plunder"}
+    @{"id"="65";"world"="365";"type"="Members";"condition" = "High Risk World"}
+    @{"id"="66";"world"="366";"type"="Members";"condition" = "1500 skill total"}
+    @{"id"="67";"world"="367";"type"="Members";"condition" = "Group Questing"}
+    @{"id"="68";"world"="368";"type"="Members";"condition" = "-"}
+    @{"id"="69";"world"="369";"type"="Members";"condition" = "Wilderness PK - Members"}
+    @{"id"="70";"world"="370";"type"="Members";"condition" = "Fishing Trawler"}
+    @{"id"="71";"world"="371";"type"="Free";"condition" = "PvP World - Free"}
+    @{"id"="73";"world"="373";"type"="Members";"condition" = "1750 skill total"}
+    @{"id"="74";"world"="374";"type"="Members";"condition" = "Theatre of Blood"}
+    @{"id"="75";"world"="375";"type"="Members";"condition" = "Barbarian Fishing"}
+    @{"id"="76";"world"="376";"type"="Members";"condition" = "Theatre of Blood"}
+    @{"id"="77";"world"="377";"type"="Members";"condition" = "Mort'ton temple, Rat Pits"}
+    @{"id"="78";"world"="378";"type"="Members";"condition" = "-"}
+    @{"id"="81";"world"="381";"type"="Free";"condition" = "500 skill total"}
+    @{"id"="82";"world"="382";"type"="Free";"condition" = "-"}
+    @{"id"="83";"world"="383";"type"="Free";"condition" = "Castle Wars - Free"}
+    @{"id"="84";"world"="384";"type"="Free";"condition" = "Caste Wars"}
+    @{"id"="85";"world"="385";"type"="Free";"condition" = "750 skill total"}
+    @{"id"="86";"world"="386";"type"="Members";"condition" = "Blast Furnace"}
+    @{"id"="87";"world"="387";"type"="Members";"condition" = "Blast Furnace"}
+    @{"id"="88";"world"="388";"type"="Members";"condition" = "-"}
+    @{"id"="89";"world"="389";"type"="Members";"condition" = "-"}
+    @{"id"="90";"world"="390";"type"="Members";"condition" = "-"}
+    @{"id"="91";"world"="391";"type"="Members";"condition" = "1750 skill total"}
+    @{"id"="92";"world"="392";"type"="Members";"condition" = "PvP World"}
+    @{"id"="93";"world"="393";"type"="Free";"condition" = "Clan Wars - Free"}
+    @{"id"="94";"world"="394";"type"="Free";"condition" = "-"}
+    @{"id"="100";"world"="400";"type"="Members";"condition" = "Deadman Invitational"}
+    @{"id"="117";"world"="417";"type"="Free";"condition" = "-"}
 )
 #var: Ping object
 $ping = new-object System.Net.NetworkInformation.Ping -ErrorAction Stop
@@ -113,7 +112,7 @@ function testWorlds($worldsToTest){
         if(($worldsToTest[$i]['type'] -eq 'Free' -and $testFree) -or ($worldsToTest[$i]['type'] -eq "Members" -and $testMembers)){
 	        #response from ping
             Try {
-                $reply = $ping.send('oldschool' + $worldsToTest[$i]['world'] +'.runescape.com')
+                $reply = $ping.send('oldschool' + $worldsToTest[$i]['id'] +'.runescape.com')
             }
             Catch {
                 $worldsToTest[$i]['ping'] = 99999999
